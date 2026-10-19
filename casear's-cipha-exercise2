@@ -1,0 +1,41 @@
+const friend = "BRUTUS";
+const shiftValue = 3;
+
+// Step 1: Store the Latin alphabet in a variable with all letters in lowercase.
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+// Step 2: Find the index of the first letter of Caesar's friend.
+const firstLetter = friend[0].toLowerCase();
+const firstLetterIndex = alphabet.indexOf(firstLetter);
+
+// Question 1: Why is the result 1 instead of 2?
+// JavaScript uses zero-based indexing, so "a" is 0, "b" is 1, and "c" is 2.
+
+// Step 3: Use the Caesar Cipher technique to shift the first letter by 3 positions.
+const encryptedFirstLetter = alphabet[(firstLetterIndex + shiftValue) % alphabet.length];
+
+// Question 2: Which operator could help us wrap around after z?
+// The modulo operator (%) wraps values back to the start of the alphabet.
+
+// Step 4: Determine the length of the alphabet.
+const alphabetLength = alphabet.length;
+
+// Step 5: Shift the whole friend name using the Caesar Cipher while wrapping around.
+const encryptedMessage = friend
+  .toLowerCase()
+  .split("")
+  .map((letter) => {
+    const index = alphabet.indexOf(letter);
+    return alphabet[(index + shiftValue) % alphabetLength].toUpperCase();
+  })
+  .join("");
+
+// Step 6: Extract the first 3 characters from the encrypted message.
+const teaser = encryptedMessage.slice(0, 3);
+
+console.log("First letter:", firstLetter);
+console.log("First letter index:", firstLetterIndex);
+console.log("Encrypted first letter:", encryptedFirstLetter);
+console.log("Alphabet length:", alphabetLength);
+console.log("Encrypted message:", encryptedMessage);
+console.log("Teaser:", teaser);
